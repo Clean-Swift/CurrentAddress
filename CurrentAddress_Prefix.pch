@@ -1,0 +1,12 @@
+/*
+ Copyright (C) 2016 Apple Inc. All Rights Reserved.
+  See LICENSE.txt for this sample’s licensing information
+  
+  Abstract:
+  Prefix header for all source files of the 'CurrentAddress' target in the 'CurrentAddress' project. 
+ */
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
