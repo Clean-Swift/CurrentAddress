@@ -80,7 +80,6 @@ class MapViewController: UIViewController, MapDisplayLogic
     super.viewDidLoad()
     doSomething()
     requestForCurrentLocation()
-    getCurrentLocation()
   }
   
   // MARK: Show alert to user
@@ -119,6 +118,7 @@ class MapViewController: UIViewController, MapDisplayLogic
   {
     if viewModel.success {
       mapView.showsUserLocation = true
+      getCurrentLocation()
     } else {
       showAlert(title: viewModel.errorTitle!, message: viewModel.errorMessage!)
     }
