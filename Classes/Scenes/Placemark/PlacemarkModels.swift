@@ -17,21 +17,6 @@ enum Placemark
 {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
-    }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
-  
-  // MARK: Show physical address
-  
   enum ShowPhysicalAddress
   {
     struct Request

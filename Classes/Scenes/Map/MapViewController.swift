@@ -15,7 +15,6 @@ import MapKit
 
 protocol MapDisplayLogic: class
 {
-  func displaySomething(viewModel: Map.Something.ViewModel)
   func displayRequestForCurrentLocation(viewModel: Map.RequestForCurrentLocation.ViewModel)
   func displayGetCurrentLocation(viewModel: Map.GetCurrentLocation.ViewModel)
   func displayCenterMap(viewModel: Map.CenterMap.ViewModel)
@@ -78,7 +77,6 @@ class MapViewController: UIViewController, MapDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    doSomething()
     requestForCurrentLocation()
   }
   
@@ -89,21 +87,6 @@ class MapViewController: UIViewController, MapDisplayLogic
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
     present(alert, animated: true, completion: nil)
-  }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = Map.Something.Request()
-    interactor?.doSomething(request: request)
-  }
-  
-  func displaySomething(viewModel: Map.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
   }
   
   // MARK: Request for current location

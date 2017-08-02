@@ -15,7 +15,6 @@ import MapKit
 
 protocol MapBusinessLogic
 {
-  func doSomething(request: Map.Something.Request)
   func requestForCurrentLocation(request: Map.RequestForCurrentLocation.Request)
   func getCurrentLocation(request: Map.GetCurrentLocation.Request)
   func centerMap(request: Map.CenterMap.Request)
@@ -38,17 +37,6 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, CLLocationManager
   var centerMapFirstTime = false
   var currentLocation: MKUserLocation?
   var placemark: MKPlacemark!
-  
-  // MARK: Do something
-  
-  func doSomething(request: Map.Something.Request)
-  {
-    worker = MapWorker()
-    worker?.doSomeWork()
-    
-    let response = Map.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
   
   // MARK: Request for current location
   

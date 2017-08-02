@@ -14,7 +14,4 @@ import UIKit
 
 class PlacemarkWorker
 {
-  func doSomeWork()
-  {
-  }
 }

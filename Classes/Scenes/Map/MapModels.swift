@@ -17,19 +17,6 @@ enum Map
 {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
-    }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
-  
   enum RequestForCurrentLocation
   {
     struct Request

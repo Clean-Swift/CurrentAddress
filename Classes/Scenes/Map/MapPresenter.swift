@@ -15,7 +15,6 @@ import MapKit
 
 protocol MapPresentationLogic
 {
-  func presentSomething(response: Map.Something.Response)
   func presentRequestForCurrentLocation(response: Map.RequestForCurrentLocation.Response)
   func presentGetCurrentLocation(response: Map.GetCurrentLocation.Response)
   func presentCenterMap(response: Map.CenterMap.Response)
@@ -25,14 +24,6 @@ protocol MapPresentationLogic
 class MapPresenter: MapPresentationLogic
 {
   weak var viewController: MapDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Map.Something.Response)
-  {
-    let viewModel = Map.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
   
   // MARK: Request for current location
   
