@@ -23,7 +23,6 @@ protocol MapBusinessLogic
 
 protocol MapDataStore
 {
-  //var name: String { get set }
   var placemark: MKPlacemark! { get set }
 }
 
@@ -31,11 +30,10 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, CLLocationManager
 {
   var presenter: MapPresentationLogic?
   var worker: MapWorker?
-  //var name: String = ""
-  let locationManager = CLLocationManager()
-  let geocoder = CLGeocoder()
+  var locationManager = CLLocationManager()
+  var geocoder = CLGeocoder()
   var centerMapFirstTime = false
-  var currentLocation: MKUserLocation?
+  var currentLocation: CLLocation?
   var placemark: MKPlacemark!
   
   // MARK: Request for current location
@@ -69,7 +67,7 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, CLLocationManager
   
   func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation)
   {
-    currentLocation = userLocation
+    currentLocation = CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
     let response = Map.GetCurrentLocation.Response(success: true, error: nil)
     presenter?.presentGetCurrentLocation(response: response)
   }
@@ -96,8 +94,8 @@ class MapInteractor: NSObject, MapBusinessLogic, MapDataStore, CLLocationManager
   
   func getCurrentAddress(request: Map.GetCurrentAddress.Request)
   {
-    if let location = currentLocation?.location {
-      geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+    if let currentLocation = currentLocation {
+      geocoder.reverseGeocodeLocation(currentLocation, completionHandler: { (placemarks, error) in
         var response: Map.GetCurrentAddress.Response
         if let placemark = placemarks?.first {
           if let addressDictionary = placemark.addressDictionary as? [String : Any], let coordinate = placemark.location?.coordinate {

@@ -29,9 +29,12 @@ class MapPresenter: MapPresentationLogic
   
   func presentRequestForCurrentLocation(response: Map.RequestForCurrentLocation.Response)
   {
-    let errorTitle = "Location Disabled"
-    let errorMessage = "Please enable location services in the Settings app."
-    let viewModel = Map.RequestForCurrentLocation.ViewModel(success: response.success, errorTitle: errorTitle, errorMessage: errorMessage)
+    var viewModel: Map.RequestForCurrentLocation.ViewModel
+    if response.success {
+      viewModel = Map.RequestForCurrentLocation.ViewModel(success: true, errorTitle: nil, errorMessage: nil)
+    } else {
+      viewModel = Map.RequestForCurrentLocation.ViewModel(success: false, errorTitle: "Location Disabled", errorMessage: "Please enable location services in the Settings app.")
+    }
     viewController?.displayRequestForCurrentLocation(viewModel: viewModel)
   }
   
