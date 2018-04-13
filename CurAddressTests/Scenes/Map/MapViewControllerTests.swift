@@ -119,7 +119,7 @@ class MapViewControllerTests: XCTestCase
   
   // MARK: View lifecycle
   
-  func testViewDidLoad()
+  func testViewDidLoadShouldRequestForCurrentLocation()
   {
     // Given
     let mapBusinessLogicSpy = MapBusinessLogicSpy()

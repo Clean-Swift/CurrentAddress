@@ -80,7 +80,7 @@ class PlacemarkViewControllerTests: XCTestCase
   
   // MARK: View lifecycle
   
-  func testViewWillAppear()
+  func testViewWillAppearShouldShowPhysicalAddress()
   {
     // Given
     let placemarkBusinessLogicSpy = PlacemarkBusinessLogicSpy()
@@ -109,32 +109,32 @@ class PlacemarkViewControllerTests: XCTestCase
     sut.displayShowPhysicalAddress(viewModel: viewModel)
     
     // Then
-    var cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 0, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.thoroughfare, "")
+    var cell = sut.tableView.cellForRow(at: IndexPath(row: 0, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.thoroughfare, "displayShowPhysicalAddress() should set the 1st cell to the thoroughfare")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 1, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.subThoroughfare, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 1, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.subThoroughfare, "displayShowPhysicalAddress() should set the 2nd cell to the subThoroughfare")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 2, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.locality, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 2, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.locality, "displayShowPhysicalAddress() should set the 3rd cell to the locality")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 3, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.subLocality, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 3, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.subLocality, "displayShowPhysicalAddress() should set the 4th cell to the subLocality")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 4, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.administrativeArea, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 4, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.administrativeArea, "displayShowPhysicalAddress() should set the 5th cell to the administrativeArea")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 5, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.subAdministrativeArea, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 5, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.subAdministrativeArea, "displayShowPhysicalAddress() should set the 6th cell to the subAdministrativeArea")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 6, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.postalCode, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 6, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.postalCode, "displayShowPhysicalAddress() should set the 7th cell to the postalCode")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 7, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.country, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 7, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.country, "displayShowPhysicalAddress() should set the 8th cell to the country")
     
-    cell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 8, section: 0))
-    XCTAssertEqual(cell.detailTextLabel?.text, placemark.isoCountryCode, "")
+    cell = sut.tableView.cellForRow(at: IndexPath(row: 8, section: 0))!
+    XCTAssertEqual(cell.detailTextLabel?.text, placemark.isoCountryCode, "displayShowPhysicalAddress() should set the 9th cell to the isoCountryCode")
   }
   
   func testDisplayShowPhysicalAddressShouldReloadTableView()
@@ -145,13 +145,14 @@ class PlacemarkViewControllerTests: XCTestCase
     loadView()
     let placemarkViewControllerTableViewSpy = PlacemarkViewControllerTableViewSpy()
     sut.tableView = placemarkViewControllerTableViewSpy
-    let viewModel = Placemark.ShowPhysicalAddress.ViewModel(placemark: CurAddressTestHelpers.placemark)
+    let placemark = CurAddressTestHelpers.placemark
+    let viewModel = Placemark.ShowPhysicalAddress.ViewModel(placemark: placemark)
     
     // When
     sut.displayShowPhysicalAddress(viewModel: viewModel)
     
     // Then
-    XCTAssertTrue(placemarkViewControllerTableViewSpy.reloadSectionsCalled, "")
-    XCTAssertEqual(placemarkViewControllerTableViewSpy.reloadSectionsIndexSet, IndexSet(integer: 0), "")
+    XCTAssertTrue(placemarkViewControllerTableViewSpy.reloadSectionsCalled, "displayShowPhysicalAddress() should ask the table view to reload its sections")
+    XCTAssertEqual(placemarkViewControllerTableViewSpy.reloadSectionsIndexSet, IndexSet(integer: 0), "displayShowPhysicalAddress() should ask the table view to reload the first section")
   }
 }
